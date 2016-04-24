@@ -1,0 +1,54 @@
+{
+  "name": "angular2-seed",
+  "version": "1.0.0",
+  "description": "A simple starter Angular2 project",
+  "scripts": {
+    "typings-install": "./node_modules/.bin/typings install",
+    "postinstall": "npm run typings-install",
+    "build": "./node_modules/.bin/webpack --inline --colors --progress --display-error-details --display-cached",
+    "watch": "npm run build -- --watch",
+    "start": "./node_modules/.bin/webpack-dev-server --inline --colors --progress --display-error-details --display-cached --port 3000  --content-base src"
+  },
+  "contributors": [
+    "Rob Wormald <robwormald@gmail.com>",
+    "PatrickJS <github@gdi2290.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "del": "2.2.0",
+    "gulp": "3.9.1",
+    "gulp-watch": "4.3.5",
+    "browserify": "^13.0.0",
+    "gulp-if": "^2.0.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "lazypipe": "^1.0.1",
+    "lodash.merge": "^4.3.2",
+    "prettysize": "0.0.3",
+    "tsify": "^0.14.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-sass": "^2.2.0",
+    "lodash.assign": "^4.0.6"
+  },
+  "dependencies": {
+    "angular2": "2.0.0-beta.14",
+    "core-js": "^2.2.0",
+    "rxjs": "5.0.0-beta.2",
+    "zone.js": "~0.6.10",
+    "ionicons": "3.0.0-alpha.3"
+  },
+  "keywords": [
+    "Angular2",
+    "angular2-seed"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular2-seed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/angular2-seed/issues"
+  },
+  "homepage": "https://github.com/angular/angular2-seed#readme"
+}
