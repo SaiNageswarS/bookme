@@ -1,54 +1,38 @@
 {
-  "name": "angular2-seed",
-  "version": "1.0.0",
-  "description": "A simple starter Angular2 project",
-  "scripts": {
-    "typings-install": "./node_modules/.bin/typings install",
-    "postinstall": "npm run typings-install",
-    "build": "./node_modules/.bin/webpack --inline --colors --progress --display-error-details --display-cached",
-    "watch": "npm run build -- --watch",
-    "start": "./node_modules/.bin/webpack-dev-server --inline --colors --progress --display-error-details --display-cached --port 3000  --content-base src"
-  },
-  "contributors": [
-    "Rob Wormald <robwormald@gmail.com>",
-    "PatrickJS <github@gdi2290.com>"
-  ],
+  "name": "angular-seed",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A starter project for AngularJS",
+  "repository": "https://github.com/angular/angular-seed",
   "license": "MIT",
   "devDependencies": {
-    "del": "2.2.0",
-    "gulp": "3.9.1",
-    "gulp-watch": "4.3.5",
-    "browserify": "^13.0.0",
-    "gulp-if": "^2.0.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "lazypipe": "^1.0.1",
-    "lodash.merge": "^4.3.2",
-    "prettysize": "0.0.3",
-    "tsify": "^0.14.1",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.7.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-sass": "^2.2.0",
-    "lodash.assign": "^4.0.6"
+    "bower": "^1.7.7",
+    "http-server": "^0.9.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.8",
+    "karma-junit-reporter": "^0.4.1",
+    "protractor": "^3.2.2",
+    "shelljs": "^0.6.0"
   },
-  "dependencies": {
-    "angular2": "2.0.0-beta.14",
-    "core-js": "^2.2.0",
-    "rxjs": "5.0.0-beta.2",
-    "zone.js": "~0.6.10",
-    "ionicons": "3.0.0-alpha.3"
-  },
-  "keywords": [
-    "Angular2",
-    "angular2-seed"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/angular/angular2-seed.git"
-  },
-  "bugs": {
-    "url": "https://github.com/angular/angular2-seed/issues"
-  },
-  "homepage": "https://github.com/angular/angular2-seed#readme"
+  "scripts": {
+    "postinstall": "bower install",
+
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8000",
+
+    "pretest": "npm install",
+    "test": "karma start karma.conf.js",
+    "test-single-run": "karma start karma.conf.js --single-run",
+
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor e2e-tests/protractor.conf.js",
+
+    "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + sed(/sourceMappingURL=angular-loader.min.js.map/,'sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map','app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\""
+  }
 }
