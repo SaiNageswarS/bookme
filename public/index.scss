@@ -1,0 +1,8 @@
+@import "components/header/header.scss";
+@import "app/chatBot/chatBot.scss";
+
+.container {
+    &.body {
+      background-color: #fafafa;  
+    }
+}
