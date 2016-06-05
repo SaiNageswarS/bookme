@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bookme.chatBot', ['ngRoute'])
+angular.module('bookme')
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/chatBot', {
@@ -9,6 +9,12 @@ angular.module('bookme.chatBot', ['ngRoute'])
   });
 }])
 
-.controller('chatBotCtrl', [function() {
-
-}]);
+.controller('chatBotCtrl', function(UserService) {  
+    UserService.login()
+      .then(function(currentUser) {
+        console.log(currentUser);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+});
