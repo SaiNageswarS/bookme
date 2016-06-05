@@ -1,15 +1,36 @@
 <bm-header></bm-header>
 
 <div class="panel chat" ng-if="currentUser">
-    <div class="panel-body chat-body"></div>
+    <div class="panel-body chat-body">
+        <ul>
+            <li ng-repeat="message in messages">
+                <img ng-src="{{currentUser.photoURL}}" 
+                    ng-if="message.sender===currentUser.uid"
+                    class="pullright">    
+                    
+                <img src="img/chat/profile_icon.svg" 
+                    ng-if="message.sender!==currentUser.uid"
+                    class="pullleft">    
+                        
+                <div class="chat-bubble"
+                    ng-class="{pullright: (message.sender===currentUser.uid),
+                                pullleft: (message.sender!==currentUser.uid)}">
+                    <p> {{message.content}} </p>
+                </div>
+            </li>
+        </ul>
+        
+    </div>
     <div class="panel-footer">
         <div class="chat-footer">
             <div class="chat-text">
-                <span class="chat-input" contenteditable="true" 
+                <span class="chat-input" contenteditable="true" id="chatTextContent"
                     placeholder="Type your message here"></span>            
             </div>
             <div class="chat-send">
-                <button type="submit"><img src="https://s3-ap-southeast-1.amazonaws.com/zoomo-static-assets/web-assets/chat/send_chat.png"></button>
+                <button type="submit" ng-click="sendMessage()">
+                    <img src="https://s3-ap-southeast-1.amazonaws.com/zoomo-static-assets/web-assets/chat/send_chat.png">
+                    </button>
             </div>
         </div>
     </div>
