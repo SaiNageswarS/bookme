@@ -3,25 +3,22 @@ angular.module('bookme')
     return {
         login: function () {
             var provider = new firebase.auth.GoogleAuthProvider();
-            var deferred = $q.defer();            
-            var currentUser = firebase.auth().currentUser;
+            var deferred = $q.defer();  
             
-            if (currentUser) {
-                deferred.resolve(currentUser);
-            }
-            else {
-                firebase.auth().signInWithRedirect(provider)
-                .then(function(result) {
-                    // This gives you a Google Access Token. You can use it to access the Google API.
+            firebase.auth().getRedirectResult().then(function(result) {
+                if (result.credential) {
                     var token = result.credential.accessToken;
                     // The signed-in user info.
-                    currentUser = result.user;
-                    deferred.resolve(currentUser);
-                }).catch(function(error) {
-                    console.log(error);
-                    deferred.reject(error);
-                });
-            }
+                    var user = result.user;
+                    deferred.resolve(user);
+                } else {
+                    firebase.auth().signInWithRedirect(provider);                    
+                }
+               
+            }).catch(function(error) {
+                deferred.reject(error);
+            });          
+            
             return deferred.promise;
         }
     };
