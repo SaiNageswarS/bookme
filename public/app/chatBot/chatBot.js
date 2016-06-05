@@ -9,10 +9,11 @@ angular.module('bookme')
   });
 }])
 
-.controller('chatBotCtrl', function(UserService) {  
+.controller('chatBotCtrl', function($scope, UserService) {  
     UserService.login()
       .then(function(currentUser) {
         console.log(currentUser);
+        $scope.currentUser = currentUser;
       })
       .catch(function(err) {
         console.log(err);
