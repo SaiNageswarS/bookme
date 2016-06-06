@@ -1,6 +1,6 @@
 .chat {
-    margin: 70px 40px;
     border: solid 1px #dadada;
+    padding: 0;
     
     .chat-body {
         height: 400px;
@@ -35,7 +35,7 @@
                     border-radius: 5px;
                     padding: 15px;
                     width: initial;
-                    max-width: 60%;
+                    max-width: 80%;
                     font-size: 15px;
 
                     &.pullright {
@@ -65,7 +65,7 @@
     }
 
     .chat-footer {
-        height: 100px;
+        height: 90px;
         background: white;
         padding: 12px;
         border-radius: 10px;
@@ -74,7 +74,6 @@
         display: flex;
         
         .chat-text {
-            width: 90%;
             height: 100%;
             display: inline-block;
             
@@ -88,14 +87,12 @@
         }
         
         .chat-send {
-            width: 10%;
             display: inline-block;  
             text-align: center; 
             
             button {
                 background: white;
                 border: none;
-                padding: 10px 10px;
             }         
         }
     }

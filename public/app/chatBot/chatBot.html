@@ -1,7 +1,8 @@
 <bm-header></bm-header>
 
-<div class="panel chat" ng-if="currentUser">
-    <div class="panel-body chat-body">
+<div class="container">
+    <div class="panel chat" ng-if="currentUser">
+    <div class="panel-body chat-body" id="chat-view">
         <ul>
             <li ng-repeat="message in messages">
                 <img ng-src="{{currentUser.photoURL}}" 
@@ -22,12 +23,12 @@
         
     </div>
     <div class="panel-footer">
-        <div class="chat-footer">
-            <div class="chat-text">
+        <div class="row chat-footer">
+            <div class="chat-text col-md-11">
                 <span class="chat-input" contenteditable="true" id="chatTextContent"
                     placeholder="Type your message here"></span>            
             </div>
-            <div class="chat-send">
+            <div class="chat-send col-md-1">
                 <button type="submit" ng-click="sendMessage()">
                     <img src="https://s3-ap-southeast-1.amazonaws.com/zoomo-static-assets/web-assets/chat/send_chat.png">
                     </button>
@@ -36,3 +37,4 @@
     </div>
 </div>
     
+</div>
