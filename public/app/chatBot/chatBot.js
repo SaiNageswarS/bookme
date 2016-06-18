@@ -12,7 +12,7 @@ angular.module('bookme')
   });
 }])
 
-.controller('chatBotCtrl', function($scope, UserService, ChatService) { 
+.controller('chatBotCtrl', function($scope, UserService, ChatService, StateMachine) { 
     var refreshUI = function() {
         window.setTimeout(function() {
            var contentView = document.getElementById('chat-view');
@@ -27,10 +27,12 @@ angular.module('bookme')
         $scope.currentUser = currentUser;
         
         var chatInstance = ChatService.getInstance($scope.currentUser.uid, appId);
+        var stateMachine = new StateMachine($scope.currentUser.uid, appId);
         
         $scope.sendMessage = function() {
           var text = document.getElementById("chatTextContent").textContent;
           chatInstance.sendMessage(text);
+          stateMachine.transitToTargetState(text);
           document.getElementById("chatTextContent").innerHTML = "";
         };
         
@@ -41,6 +43,7 @@ angular.module('bookme')
             // scroll chat to bottom
             refreshUI();
         });
+       
       })
       .catch(function(err) {
         console.log(err);

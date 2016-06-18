@@ -16,7 +16,7 @@
                 <div class="chat-bubble"
                     ng-class="{pullright: (message.sender===currentUser.uid),
                                 pullleft: (message.sender!==currentUser.uid)}">
-                    <p> {{message.content}} </p>
+                    <p ng-bind-html="message.content"> </p>
                 </div>
             </li>
         </ul>

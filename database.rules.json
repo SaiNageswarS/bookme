@@ -1,4 +1,15 @@
 {
-  ".read": true,
-  ".write": true
+    "rules": {
+        ".read": true,
+        ".write": true,
+         "messages" : {
+            "$app_id" : {
+                "$user_id" : {
+                  ".indexOn" : "sentOn",
+                    ".write": "$user_id === auth.uid",
+                    ".read": "$user_id === auth.uid"
+                }   
+              }
+       }
+    }
 }
