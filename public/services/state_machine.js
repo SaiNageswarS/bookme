@@ -1,6 +1,6 @@
 angular.module('bookme')
 .factory('StateMachine', function() {
-    var stateMachine = function (userId, appId) {
+    var stateMachine = function (userId, appId, input_type_cb) {
         var self = this;
         var rootRef = firebase.database();
     
@@ -15,24 +15,36 @@ angular.module('bookme')
             
             // listener to handle state change
             user_current_state_ref.on('value', function (snapshot) {
-                current_state = snapshot.val() || 'welcome_state'; 
+                current_state_obj = snapshot.val() || {state: 'welcome_state', sent: false}; 
+                current_state = state_machine[current_state_obj.state];
                 
-                var message = {
-                    sender: appId,
-                    sentOn: (new Date()).getTime(),
-                    type: 'text',
-                    content: state_machine[current_state].message
-                };
-                var newMessageRef = chatRef.push();
-                newMessageRef.set(message);
+                if (input_type_cb) {
+                    input_type_cb(current_state.input_type, current_state.inputs);
+                }
+                if (!current_state_obj.sent) {
+                    var message = {
+                        sender: appId,
+                        sentOn: (new Date()).getTime(),
+                        type: 'text',
+                        content: current_state.message
+                    };
+                    var newMessageRef = chatRef.push();
+                    newMessageRef.set(message);
+                    current_state_obj.sent = true;
+                    user_current_state_ref.set(current_state_obj);
+                }
             });
             
             // transit state on user input
             self.transitToTargetState = function (userInput) {
                 var target_state = 
-                    state_machine[current_state].transitions[userInput] || 
-                    state_machine[current_state].transitions['any'];
-                user_current_state_ref.set(target_state);
+                    current_state.transitions[userInput] || 
+                    current_state.transitions['any'];
+                var target_state_obj = {
+                    state: target_state,
+                    sent: false
+                }
+                user_current_state_ref.set(target_state_obj);
             };
         });
     } 

@@ -87,6 +87,16 @@
       .chat .chat-footer .chat-send button {
         background: white;
         border: none; }
+    .chat .chat-footer .option-bubble {
+      background-color: #dadada;
+      border-radius: 4px;
+      padding: 8px 15px;
+      text-align: center;
+      margin: 10px;
+      cursor: pointer; }
+      .chat .chat-footer .option-bubble.selected {
+        background-color: lightblue;
+        color: white; }
 
 [contenteditable=true]:empty:before {
   content: attr(placeholder);

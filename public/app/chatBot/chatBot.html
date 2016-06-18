@@ -24,10 +24,26 @@
     </div>
     <div class="panel-footer">
         <div class="row chat-footer">
-            <div class="chat-text col-md-11">
+            
+            <div class="chat-text col-md-11" ng-if="input_type === 'text'">
                 <span class="chat-input" contenteditable="true" id="chatTextContent"
                     placeholder="Type your message here"></span>            
             </div>
+            
+            <div class="col-md-11" ng-if="input_type === 'list'">
+                <div class="col-md-3 option-bubble" 
+                    ng-class="{selected: data_key===selected_key}" 
+                    ng-repeat="(data_key, data_val) in data"
+                    ng-click="setSelectedInput(data_key)">
+                    {{data_val}}    
+                </div>           
+            </div>
+            
+            <div class="chat-text col-md-11" ng-if="input_type === 'datetime'">
+                <span class="chat-input" id="chatTextContent"
+                    placeholder="Enter Date">{{selected_key}}</span>            
+            </div>
+            
             <div class="chat-send col-md-1">
                 <button type="submit" ng-click="sendMessage()">
                     <img src="https://s3-ap-southeast-1.amazonaws.com/zoomo-static-assets/web-assets/chat/send_chat.png">

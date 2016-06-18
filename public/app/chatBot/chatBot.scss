@@ -95,6 +95,20 @@
                 border: none;
             }         
         }
+        
+        .option-bubble {
+            background-color: #dadada;
+            border-radius: 4px;
+            padding: 8px 15px;
+            text-align: center;
+            margin: 10px;
+            cursor: pointer;
+            
+            &.selected {
+                background-color: lightblue;
+                color: white;
+            }
+        }
     }
 }
 

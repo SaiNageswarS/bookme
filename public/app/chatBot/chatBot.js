@@ -20,6 +20,9 @@ angular.module('bookme')
            contentView.scrollTop = height;
         }, 300)  
     };
+    
+    $scope.input_type = 'text';
+    $scope.data = {};
    
     UserService.login()
       .then(function(currentUser) {
@@ -27,13 +30,32 @@ angular.module('bookme')
         $scope.currentUser = currentUser;
         
         var chatInstance = ChatService.getInstance($scope.currentUser.uid, appId);
-        var stateMachine = new StateMachine($scope.currentUser.uid, appId);
+        var stateMachine = 
+            new StateMachine(
+              $scope.currentUser.uid, 
+              appId,
+              function(input_type, data) {
+                $scope.input_type = input_type;
+                $scope.data = data;
+                try { $scope.$apply(); } catch(err) {}
+              });
         
         $scope.sendMessage = function() {
-          var text = document.getElementById("chatTextContent").textContent;
-          chatInstance.sendMessage(text);
-          stateMachine.transitToTargetState(text);
-          document.getElementById("chatTextContent").innerHTML = "";
+            if ($scope.input_type === 'text') {
+              var text = document.getElementById("chatTextContent").textContent;
+              chatInstance.sendMessage(text);
+              stateMachine.transitToTargetState(text);
+              document.getElementById("chatTextContent").innerHTML = "";
+            }
+            else if ($scope.input_type === 'list') {
+              chatInstance.sendMessage($scope.selected_key);
+              stateMachine.transitToTargetState($scope.selected_key);
+              $scope.selected_key = '';
+            }
+        };
+        
+        $scope.setSelectedInput = function(data_key) {
+          $scope.selected_key = data_key;
         };
         
         $scope.messages = [];
